@@ -25,6 +25,18 @@
 
 <?php wp_head(); ?>
 
+<!--  Google analytics Code start here -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-72851922-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!--  Google analytics Code end here -->
 </head>
 
 <body <?php body_class(); ?>>
@@ -63,7 +75,7 @@
 		$logo = get_theme_mod('header_logo', '');
 		$tagline = ( get_bloginfo( 'description' ) ) ? get_bloginfo( 'description' ) : '';
 		$header_show = get_theme_mod('header_show', 'logo-text');
-		
+
 		if( $header_show == 'logo-only' ){
 			$show_tagline = false;
 		}
@@ -77,11 +89,11 @@
 
 		<div class="container">
 			<div id="logo">
-				<span class="site-name"><a class="navbar-brand" href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php 
-					if( $show_logo && $logo ) { 
+				<span class="site-name"><a class="navbar-brand" href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php
+					if( $show_logo && $logo ) {
                                             echo wp_get_attachment_image($logo, 'full');
 					}
-					elseif( $show_title ) { 
+					elseif( $show_title ) {
 						bloginfo( 'name' );
 					}
 					else{
@@ -89,20 +101,20 @@
 					} ?>
 					</a>
 				</span><!-- end of .site-name -->
-				
+
 				<?php if( $show_tagline && get_bloginfo( 'description' ) != "" ) : ?>
 					<div class="tagline"><?php bloginfo( 'description' ); ?></div>
 				<?php endif; ?>
 			</div><!-- end of #logo -->
-			
+
 			<?php if( ! is_front_page() || ! is_home() ) : ?>
 			<div id="line"></div>
 			<?php endif; ?>
 		</div>
-		
+
 	</header><!-- #masthead -->
 
-	
+
 	<div id="content" class="site-content">
 
 		<div class="top-section">
@@ -110,20 +122,20 @@
 		</div>
 
 		<div class="container main-content-area">
-		
+
 			<?php if( is_single() && has_category() ) : ?>
 			<div class="cat-title">
 				<?php echo get_the_category_list(); ?>
-			</div>		
+			</div>
 			<?php endif; ?>
                         <?php
-                            global $post;                            
+                            global $post;
                             if( is_singular() && get_post_meta($post->ID, 'site_layout', true) ){
                                 $layout_class = get_post_meta($post->ID, 'site_layout', true);
                             }
                             else{
                                 $layout_class = get_theme_mod( 'activello_sidebar_position' );
                             }?>
-                    
+
 			<div class="row">
 				<div class="main-content-inner <?php echo activello_main_content_bootstrap_classes(); ?> <?php echo $layout_class; ?>">
